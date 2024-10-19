@@ -1,6 +1,7 @@
 package com.example.main;
 
-import com.example.character.Ship;
+import com.example.entities.Ship;
+import com.example.random.AsteroidHandler;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -19,12 +20,14 @@ public class App extends Application {
         Pane pane = new Pane();
         scene = new Scene(pane);
         Ship ship = new Ship(400, 400);
+        AsteroidHandler asteroidHandler = new AsteroidHandler();
 
         pane.setPrefSize(800, 800);
         pane.setStyle("-fx-background-color: #000000");
         
         ship.renderEntity(pane, ship.getEntity());
-        ship.handleControls(scene, ship, 800, 800);
+        ship.handleControls(scene, pane, ship, 800, 800);
+        asteroidHandler.handle(pane);
 
         stage.setTitle("Asteroids by Dan Rusu");
         stage.setScene(scene);

@@ -1,4 +1,8 @@
+com\example\entities\Ship$1.class
+com\example\entities\Ship.class
+com\example\entities\Entity.class
+com\example\random\AsteroidHandler.class
+com\example\entities\Bullet.class
 com\example\main\App.class
-com\example\character\Entity.class
-com\example\character\Ship.class
-com\example\character\Ship$1.class
+com\example\random\AsteroidGenerator.class
+com\example\entities\Asteroid.class

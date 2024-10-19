@@ -1,4 +1,4 @@
-package com.example.character;
+package com.example.entities;
 
 import javafx.geometry.Point2D;
 
@@ -9,7 +9,6 @@ import javafx.scene.shape.Polygon;
 public abstract class Entity {
     private Polygon entity;
     private Point2D movementVector;
-    private static final double accFactor = 0.03;
 
     public Entity(int x, int y, Polygon entity){
         this.entity = entity;
@@ -43,10 +42,10 @@ public abstract class Entity {
         if(this.entity.getTranslateX() > width)  this.entity.setTranslateX(0);
         if(this.entity.getTranslateY() < 0)  this.entity.setTranslateY(height);
         if(this.entity.getTranslateY() > height)  this.entity.setTranslateY(0);
-        System.out.println(height + " " + width);
+        // System.out.println(height + " " + width);
     }
 
-    public void accelerate(){
+    public void accelerate(double accFactor){
         double deltaX = Math.cos(Math.toRadians(entity.getRotate()));
         double deltaY = Math.sin(Math.toRadians(entity.getRotate()));
 
