@@ -1,7 +1,8 @@
 package com.example.main;
 
 import com.example.entities.Ship;
-import com.example.random.AsteroidHandler;
+import com.example.sys.AsteroidHandler;
+import com.example.sys.Game;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,20 +15,19 @@ import javafx.scene.layout.Pane;
 public class App extends Application {
 
     private static Scene scene;
-
+    
     @Override
     public void start(Stage stage) throws Exception {
         Pane pane = new Pane();
         scene = new Scene(pane);
         Ship ship = new Ship(400, 400);
-        AsteroidHandler asteroidHandler = new AsteroidHandler();
 
         pane.setPrefSize(800, 800);
         pane.setStyle("-fx-background-color: #000000");
         
         ship.renderEntity(pane, ship.getEntity());
-        ship.handleControls(scene, pane, ship, 800, 800);
-        asteroidHandler.handle(pane);
+        AsteroidHandler.init(pane);
+        Game.run(scene, pane, ship, 800, 800);
 
         stage.setTitle("Asteroids by Dan Rusu");
         stage.setScene(scene);

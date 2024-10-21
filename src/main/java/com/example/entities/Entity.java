@@ -5,10 +5,20 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 
 public abstract class Entity {
     private Polygon entity;
     private Point2D movementVector;
+    private Boolean exists;
+
+    public Boolean getExists() {
+        return exists;
+    }
+
+    public void setExists(Boolean exists) {
+        this.exists = exists;
+    }
 
     public Entity(int x, int y, Polygon entity){
         this.entity = entity;
@@ -34,15 +44,18 @@ public abstract class Entity {
         pane.getChildren().add(entity);
     }
 
-    public void moveEntity(double height, double width){
+    public void moveEntity(double height, double width, Boolean stayOnScreen){
         this.entity.setTranslateX(this.entity.getTranslateX() + this.movementVector.getX());
         this.entity.setTranslateY(this.entity.getTranslateY() + this.movementVector.getY());
 
-        if(this.entity.getTranslateX() < 0)  this.entity.setTranslateX(width);
-        if(this.entity.getTranslateX() > width)  this.entity.setTranslateX(0);
-        if(this.entity.getTranslateY() < 0)  this.entity.setTranslateY(height);
-        if(this.entity.getTranslateY() > height)  this.entity.setTranslateY(0);
-        // System.out.println(height + " " + width);
+        if(this.entity.getTranslateX() < 0) {this.entity.setTranslateX(width); this.setExists(stayOnScreen);}
+
+        if(this.entity.getTranslateX() > width) {this.entity.setTranslateX(0); this.setExists(stayOnScreen);}
+
+        if(this.entity.getTranslateY() < 0) {this.entity.setTranslateY(height); this.setExists(stayOnScreen);}
+
+        if(this.entity.getTranslateY() > height) {this.entity.setTranslateY(0); this.setExists(stayOnScreen);}
+        
     }
 
     public void accelerate(double accFactor){
@@ -54,4 +67,13 @@ public abstract class Entity {
 
         this.movementVector = this.movementVector.add(deltaX, deltaY);
     }
+
+    public Boolean checkCollision(Entity entity){
+        Shape intersect = Shape.intersect(this.getEntity(), entity.getEntity());
+        if((intersect.getLayoutBounds().getHeight() <= 0) || (intersect.getLayoutBounds().getWidth() <= 0)){
+            return false;
+        }
+        return true;
+    }
+
 }

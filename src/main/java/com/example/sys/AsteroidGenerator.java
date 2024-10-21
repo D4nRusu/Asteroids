@@ -1,4 +1,4 @@
-package com.example.random;
+package com.example.sys;
 
 import java.util.Random;
 import javafx.scene.shape.Polygon;
@@ -11,7 +11,8 @@ public class AsteroidGenerator {
         Random random = new Random();
         for(int i = 0; i < octagon.getPoints().size(); ++i){
             int variance = random.nextInt(10) - 2;
-            octagon.getPoints().set(i, octagon.getPoints().get(i) * 6 + variance);
+            int size = random.nextInt(8) + 4;
+            octagon.getPoints().set(i, octagon.getPoints().get(i) * size + variance);
         }
         return octagon;
     }
