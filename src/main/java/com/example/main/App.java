@@ -7,6 +7,7 @@ import com.example.sys.AsteroidHandler;
 import com.example.sys.Game;
 
 import javafx.application.Application;
+// import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
@@ -21,8 +22,7 @@ public class App extends Application {
 
     private static Scene scene;
     
-    @Override
-    public void start(Stage stage) throws Exception {
+    private Scene createGame(){
         Pane pane = new Pane();
         scene = new Scene(pane);
         Ship ship = new Ship(400, 400);
@@ -41,8 +41,13 @@ public class App extends Application {
         AsteroidHandler.init(pane, ship);
         Game.run(scene, pane, ship, 800, 800, text, points);
 
+        return scene;
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
         stage.setTitle("Asteroids by Dan Rusu");
-        stage.setScene(scene);
+        stage.setScene(createGame());
         stage.show();
     }
 

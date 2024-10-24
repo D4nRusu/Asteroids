@@ -51,7 +51,7 @@ public class Game {
                     
                     bullets.add(bullet);
 
-                    bullet.accelerate(2);
+                    bullet.accelerate(4);
                     
 
                     pane.getChildren().add(bullet.getEntity());
