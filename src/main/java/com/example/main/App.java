@@ -26,7 +26,7 @@ public class App extends Application {
         pane.setStyle("-fx-background-color: #000000");
         
         ship.renderEntity(pane, ship.getEntity());
-        AsteroidHandler.init(pane);
+        AsteroidHandler.init(pane, ship);
         Game.run(scene, pane, ship, 800, 800);
 
         stage.setTitle("Asteroids by Dan Rusu");

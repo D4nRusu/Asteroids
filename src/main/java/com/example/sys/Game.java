@@ -58,7 +58,7 @@ public class Game {
                 ship.moveEntity(height, width, true);   
                 pane.getChildren().add(ship.getEntity());
 
-                // AsteroidHandler.generate(ship, pane);
+                AsteroidHandler.generate(ship, pane);
 
                 for(Asteroid asteroid: AsteroidHandler.getAsteroids()){
                     if(asteroid.checkCollision(ship) == true){
