@@ -12,11 +12,14 @@ import java.util.Random;
 public class AsteroidHandler {
     private static List<Asteroid> asteroids = new ArrayList<>();
 
-    private static List<Asteroid> populate(){
+    private static List<Asteroid> populate(Ship ship){
         Random rand = new Random();
 
         for(int i = 0; i < 5; ++i){
             Asteroid asteroid = new Asteroid(rand.nextInt(400), rand.nextInt(400));
+            while(ship.checkCollision(asteroid) == true){
+                asteroid = new Asteroid(rand.nextInt(400), rand.nextInt(400));
+            }
             asteroids.add(asteroid);
         }
 
@@ -27,8 +30,8 @@ public class AsteroidHandler {
         return asteroids;
     }
 
-    public static void init(Pane pane){
-        populate();
+    public static void init(Pane pane, Ship ship){
+        populate(ship);
         for(int i = 0; i < asteroids.size(); ++i){
             pane.getChildren().add(asteroids.get(i).getEntity());
         }
