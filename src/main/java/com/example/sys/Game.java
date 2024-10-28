@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import com.example.entities.Asteroid;
@@ -15,12 +16,14 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+
 
 public class Game {
     private static Map<KeyCode, Boolean> keys = new HashMap<>();
     private static List<Bullet> bullets = new ArrayList<>();
 
-    public static void run(Scene scene, Pane pane, Ship ship, double height, double width){
+    public static void run(Scene scene, Pane pane, Ship ship, double height, double width, Text text, AtomicInteger points){
         scene.setOnKeyPressed(event->{
             if(event.getCode() != KeyCode.SPACE) keys.put(event.getCode(), Boolean.TRUE);
         });
@@ -49,7 +52,7 @@ public class Game {
                     
                     bullets.add(bullet);
 
-                    bullet.accelerate(2);
+                    bullet.accelerate(4);
                     
 
                     pane.getChildren().add(bullet.getEntity());
@@ -58,12 +61,16 @@ public class Game {
                 ship.moveEntity(height, width, true);   
                 pane.getChildren().add(ship.getEntity());
 
+                pane.getChildren().remove(text);
+                text.setText("Points: " + points);
+                pane.getChildren().add(text);
+
                 AsteroidHandler.generate(ship, pane);
 
                 for(Asteroid asteroid: AsteroidHandler.getAsteroids()){
                     if(asteroid.checkCollision(ship) == true){
                         ship.getEntity().setFill(Color.RED);
-                        stop();
+                        stop();                        
                     }
                     asteroid.moveEntity(height, width, true);
                 }
@@ -77,6 +84,7 @@ public class Game {
                         if(bullet.checkCollision(asteroid)){
                             bullet.setExists(false);
                             asteroid.setExists(false);
+                            text.setText("Points: " + points.addAndGet(1));
                         }
                     });
                 });

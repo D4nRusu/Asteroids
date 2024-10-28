@@ -1,36 +1,22 @@
 package com.example.main;
 
-import com.example.entities.Ship;
-import com.example.sys.AsteroidHandler;
-import com.example.sys.Game;
-
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.layout.Pane;
+
 
 /**
  * Asteroids made with JavaFX by Dan Rusu
  */
 public class App extends Application {
 
-    private static Scene scene;
-    
+    private AppController controller;
+
     @Override
     public void start(Stage stage) throws Exception {
-        Pane pane = new Pane();
-        scene = new Scene(pane);
-        Ship ship = new Ship(400, 400);
+        controller = new AppController();
 
-        pane.setPrefSize(800, 800);
-        pane.setStyle("-fx-background-color: #000000");
-        
-        ship.renderEntity(pane, ship.getEntity());
-        AsteroidHandler.init(pane, ship);
-        Game.run(scene, pane, ship, 800, 800);
-
-        stage.setTitle("Asteroids by Dan Rusu");
-        stage.setScene(scene);
+        stage.setTitle("Asteroids");
+        stage.setScene(controller.createMenu(stage));
         stage.show();
     }
 
