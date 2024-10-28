@@ -1,6 +1,7 @@
 com\example\entities\Ship.class
 com\example\entities\Entity.class
 com\example\entities\Bullet.class
+com\example\sys\Menu.class
 com\example\main\App.class
 com\example\sys\AsteroidGenerator.class
 com\example\sys\AsteroidHandler.class

@@ -12,20 +12,20 @@ public abstract class Entity {
     private Point2D movementVector;
     private Boolean exists;
 
-    public Boolean getExists() {
-        return exists;
-    }
-
-    public void setExists(Boolean exists) {
-        this.exists = exists;
-    }
-
     public Entity(int x, int y, Polygon entity){
         this.entity = entity;
         this.entity.setTranslateX(x);
         this.entity.setTranslateY(y);
         this.movementVector = new Point2D(0, 0);
         this.entity.setFill(Color.WHITE);
+    }
+
+    public Boolean getExists() {
+        return exists;
+    }
+
+    public void setExists(Boolean exists) {
+        this.exists = exists;
     }
 
     public Polygon getEntity(){
