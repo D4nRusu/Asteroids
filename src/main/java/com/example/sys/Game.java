@@ -18,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+
 public class Game {
     private static Map<KeyCode, Boolean> keys = new HashMap<>();
     private static List<Bullet> bullets = new ArrayList<>();
@@ -69,7 +70,7 @@ public class Game {
                 for(Asteroid asteroid: AsteroidHandler.getAsteroids()){
                     if(asteroid.checkCollision(ship) == true){
                         ship.getEntity().setFill(Color.RED);
-                        stop();
+                        stop();                        
                     }
                     asteroid.moveEntity(height, width, true);
                 }

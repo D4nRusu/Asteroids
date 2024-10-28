@@ -14,12 +14,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class AppController {
 
-    private Scene scene;
+    private static Scene scene;
 
-    public Scene createGame(){
+    public Scene createGame(Stage stage){
         Pane pane = new Pane();
         pane.setPrefSize(800, 800);
         pane.setStyle("-fx-background-color: #000000");
@@ -37,11 +38,11 @@ public class AppController {
         ship.renderEntity(pane, ship.getEntity());
         AsteroidHandler.init(pane, ship);
         Game.run(scene, pane, ship, 800, 800, text, points);
-
+        
         return scene;
     }
 
-    public Scene createMenu(){
+    public Scene createMenu(Stage stage){
         GridPane pane = new GridPane();
         pane.setPrefSize(800, 800);
         pane.setStyle("-fx-background-color: #000000");
@@ -63,7 +64,13 @@ public class AppController {
         pane.add(title, 1, 1);
         pane.add(text, 1, 2);
 
+        scene.setOnKeyPressed(event->{setStage(stage, createGame(stage));});
+
         return scene;
+    }
+
+    public void setStage(Stage stage, Scene scene){
+        stage.setScene(scene);
     }
 
 }

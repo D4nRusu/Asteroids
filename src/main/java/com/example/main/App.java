@@ -1,7 +1,6 @@
 package com.example.main;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
@@ -14,11 +13,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene;
         controller = new AppController();
 
         stage.setTitle("Asteroids");
-        stage.setScene(controller.createMenu());
+        stage.setScene(controller.createMenu(stage));
         stage.show();
     }
 
